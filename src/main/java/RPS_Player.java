@@ -7,11 +7,12 @@ public class RPS_Player {
     private String name;
 
     public RPS_Player(String name){
-        // TODO: replace this line with your code.
+        this.name = name;
+        clear();
     }
 
     public String getName(){
-        // TODO: replace this line with your code.
+        return name;
     }
 
     /**
@@ -19,7 +20,7 @@ public class RPS_Player {
      * @return returns the number of games played.
      */
     public int getNumberOfGamesPlayed(){
-        // TODO: replace this line with your code.
+        return numberOfGamesPlayed;
     }
 
     /**
@@ -27,7 +28,7 @@ public class RPS_Player {
      * @return returns the number of games won.
      */
     public int getNumberOfGamesWon(){
-        // TODO: replace this line with your code.
+        return numberOfGamesWon;
     }
 
     /**
@@ -35,14 +36,17 @@ public class RPS_Player {
      * @return win percentage as a double.
      */
     public double getWinPercentage(){
-        // TODO: replace this line with your code.
+        int winPercentage = numberOfGamesWon / numberOfGamesPlayed;
+        return winPercentage;
     }
 
     /**
      * Starts a new game.
      */
     public void clear(){
-        // TODO: replace this line with your code.
+        numberOfGamesWon = 0;
+        numberOfGamesPlayed = 0;
+        choice = 0;
     }
 
     /**
@@ -53,7 +57,20 @@ public class RPS_Player {
      * @return Reference to the RPS_Player that won or a null if there is a draw
      */
     public RPS_Player challenge(RPS_Player anotherPlayer){
-        // TODO: replace this line with your code.
+        String thisPlayerChoice = getName();
+        String anotherPlayerChoice = anotherPlayer.getName();
+
+        String result = getName();
+
+        if (false) {
+            this.numberOfGamesWon++;
+            return this;
+        } else if (false) {
+            anotherPlayer.numberOfGamesWon++;
+            return anotherPlayer;
+        } else {
+            return null; // It's a draw
+        }
     }
 
     /**
@@ -64,7 +81,29 @@ public class RPS_Player {
      * @return Reference to the RPS_Player that won or a null if there is a draw
      */
     public RPS_Player keepAndChallenge(RPS_Player anotherPlayer){
-        // TODO: replace this line with your code.
+        int thisPlayerChoice = this.choice;
+        int anotherPlayerChoice = anotherPlayer.hashCode();
+
+        int result = determineWinner(thisPlayerChoice, anotherPlayerChoice);
+
+        if (result == 1) {
+            this.numberOfGamesWon++;
+            return this;
+        } else if (result == -1) {
+            anotherPlayer.numberOfGamesWon++;
+            return anotherPlayer;
+        } else {
+            return null;
+        }    }
+
+    private int determineWinner(int choice1, int choice2) {
+        if (choice1 == choice2) {
+            return 0;
+        } else if ((choice1 == 1 && choice2 == 3) || (choice1 == 2 && choice2 == 1) || (choice1 == 3 && choice2 == 2)) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
 }
